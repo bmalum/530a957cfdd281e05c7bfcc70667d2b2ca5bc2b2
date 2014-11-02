@@ -3,10 +3,13 @@ package SE02;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-public class Producer implements Runnable{
+public class Producer extends Thread{
 	Buffer buffer = new Buffer();
+	SharedData data = new SharedData();
+	
 	@Override
 	public void run() {
+		data.addBuffer(buffer);
 		System.out.println("Producer started");
 		int R = 0;
 		int W = 0;
@@ -18,6 +21,7 @@ public class Producer implements Runnable{
 		Random r = new Random();
 		
 		do{
+			//System.out.println(data.getBufferList().size());
 			R = r.nextInt(High_Gen-Low_Gen) + Low_Gen;
 			W = r.nextInt(High_Wait-Low_Wait) + Low_Wait;
 			try {
@@ -34,6 +38,7 @@ public class Producer implements Runnable{
 			}
 			buffer.addToQueue(R);
 		}while(R!=0);
+		data.removeBuffer(buffer);
 	}	
 	
 }
