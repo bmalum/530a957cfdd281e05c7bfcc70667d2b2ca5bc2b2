@@ -26,7 +26,12 @@ public class Buffer {
 	}
 	
 	public synchronized int  peek() {
-		return queue.peek();
+		 if ( null == queue.peek()){
+		 return -1;
+		 }
+		 else{
+			 return queue.peek();
+		 }
 	}
 	
 	public boolean check(){

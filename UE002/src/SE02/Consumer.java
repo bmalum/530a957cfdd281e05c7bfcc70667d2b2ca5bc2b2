@@ -28,10 +28,13 @@ public class Consumer extends Thread{
 		}
 	}
 	
-	public List<Integer> bufferContent(List<Buffer> tmp) {		
+	public List<Integer> bufferContent(List<Buffer> tmp) {
+		result.clear();
+		//System.out.println("Test "+ tmp.get(0).peek());
 		for (int i = 0; i < tmp.size(); i++) {
 			if(tmp.size() == 0){
-				stop = false;
+				// stop = false;
+				result.add(0);
 			}
 			else if (tmp.get(i).peek() > 0) {
 				result.add(tmp.get(i).pollFromQueue());
@@ -40,7 +43,7 @@ public class Consumer extends Thread{
 				System.out.println("da is was schief gegangen");
 			}
 		}
-		System.out.println(result);
+		//System.out.println(result);
 		return result;
 	}
 

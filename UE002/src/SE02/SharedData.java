@@ -5,7 +5,7 @@ import java.util.List;
 
 public class SharedData {
 	private static SharedData instance = null;
-	private List<Buffer> bufferList = new ArrayList<Buffer>();
+	private static List<Buffer> bufferList = new ArrayList<Buffer>();
 		
 
 	protected SharedData() {
@@ -35,6 +35,9 @@ public class SharedData {
 		boolean notify = true;
 		for (int i = 0; i < bufferList.size(); i++) {
 			notify = notify && !bufferList.get(i).check();
+		}
+		if (bufferList.size() == 0) {
+			return false;
 		}
 		return notify;
 	}
